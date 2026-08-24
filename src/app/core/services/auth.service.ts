@@ -4,13 +4,17 @@ import { LoginPayload } from '../interfaces/login-payload';
 import { Observable } from 'rxjs';
 import { AuthResponse } from '../interfaces/auth-response';
 import { RegisterPayload } from '../interfaces/register-payload';
+import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
  private readonly _httpClient = inject(HttpClient)
+ private readonly _router = inject(Router)
 private readonly _baseUrl:string="https://ecommerce.routemisr.com/api/v1";
+ userData:string ='';
 
 setRegisterForm(data: RegisterPayload): Observable<AuthResponse> {
   return this._httpClient.post<AuthResponse>(
@@ -20,6 +24,16 @@ setRegisterForm(data: RegisterPayload): Observable<AuthResponse> {
 }
   setLoginForm(data: LoginPayload): Observable<AuthResponse> {
       return this._httpClient.post<AuthResponse>(`${this._baseUrl}/auth/signin`, data);
+    }
+    saveUserData():void{
+      if(localStorage.getItem('userToken')!==null){
+        this.userData=jwtDecode(localStorage.getItem('userToken')!);
+      }
+    }
+    logOut():void{
+      localStorage.removeItem('userToken');
+      this.userData='';
+      this._router.navigate(['/login'])
     }
 }
  
