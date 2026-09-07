@@ -6,6 +6,7 @@ import { AuthResponse } from '../interfaces/auth-response';
 import { RegisterPayload } from '../interfaces/register-payload';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
+import { environment } from '../../../environments/environment.development';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +14,7 @@ export class AuthService {
 
  private readonly _httpClient = inject(HttpClient)
  private readonly _router = inject(Router)
-private readonly _baseUrl:string="https://ecommerce.routemisr.com/api/v1";
+private readonly _baseUrl:string=environment.baseUrl;
  userData:string ='';
 
 setRegisterForm(data: RegisterPayload): Observable<AuthResponse> {
