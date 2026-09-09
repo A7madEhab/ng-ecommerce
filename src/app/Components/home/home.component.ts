@@ -21,6 +21,18 @@ export class HomeComponent implements OnInit,OnDestroy{
   productList: BaseProduct[] = [];
   
   categoriesList:Category[]=[];
+  mainSliderOptions: OwlOptions = {
+    loop: true,
+    mouseDrag: true,
+    touchDrag: false,
+    pullDrag: false,
+    dots: false,
+    autoplay:true,
+    navSpeed: 700,
+    navText: ['', ''],
+   items:1,
+    nav: true
+  }
   customOptions: OwlOptions = {
     loop: true,
     mouseDrag: true,

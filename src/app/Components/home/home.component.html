@@ -1,10 +1,65 @@
+<!-- Main Slider -->
+<section>
+  <div class="row g-0">
+    <!-- Left Side: Main Large Image -->
+    <div class="col-md-8">
+      <owl-carousel-o [options]="mainSliderOptions">
+        <ng-template carouselSlide>
+          <img
+            src="../../../assets/images/img1.avif"
+            height="300px"
+            class="w-100"
+            alt=""
+          />
+        </ng-template>
+        <ng-template carouselSlide>
+          <img
+            src="../../../assets/images/img2.avif"
+            height="300px"
+            class="w-100"
+            alt=""
+          />
+        </ng-template>
+        <ng-template carouselSlide>
+          <img
+            src="../../../assets/images/img3.avif"
+            height="300px"
+            class="w-100"
+            alt=""
+          />
+        </ng-template>
+      </owl-carousel-o>
+    </div>
+
+    <!-- Right Side: Two Vertically Stacked Images -->
+    <div class="col-md-4 d-flex flex-column">
+      <img
+        src="../../../assets/images/img2.avif"
+        height="150px"
+        class="w-100"
+        alt=""
+      />
+      <img
+        src="../../../assets/images/img3.avif"
+        height="150px"
+        class="w-100"
+        alt=""
+      />
+    </div>
+  </div>
+</section>
 <!-- categories -->
 <section>
   <div>Some tags before</div>
   <owl-carousel-o [options]="customOptions">
     @for (slide of categoriesList; track slide._id) {
       <ng-template carouselSlide [id]="slide._id">
-        <img class="w-100" height="250px" [src]="slide.image" [alt]="slide.name" />
+        <img
+          class="w-100"
+          height="250px"
+          [src]="slide.image"
+          [alt]="slide.name"
+        />
         <h3 class="h6 text-main">{{ slide.name }}</h3>
       </ng-template>
     }
