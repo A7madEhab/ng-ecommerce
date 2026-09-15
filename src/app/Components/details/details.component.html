@@ -1,0 +1,24 @@
+@if(productObj){
+<section>
+  <div class="row my-2 align-items-center">
+    <div class="col-md-3">
+      <img [src]="productObj.imageCover" class="w-100" alt="" />
+    </div>
+    <div class="col-md-9">
+      <h3 class="fs-5">{{ productObj.title }}</h3>
+      <p class="text-muted mx-2">{{ productObj.title }}</p>
+      <p class="fs-6">{{ productObj.category.name }}</p>
+      <div class="d-flex justify-content-between">
+        <div>
+          <p>{{ productObj.price }} EGP</p>
+        </div>
+        <div class="d-flex align-items-center gap-1">
+          <i class="fa-solid fa-star text-warning"></i>
+          <p class="mb-0">{{ productObj.ratingsAverage }}</p>
+        </div>
+      </div>
+      <button class="w-100 btn-main">+Add To Cart</button>
+    </div>
+  </div>
+</section>
+}

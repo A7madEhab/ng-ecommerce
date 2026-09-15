@@ -14,7 +14,7 @@ getAllProducts():Observable<ProductsListResponse>{
 return this._httpClient.get<ProductsListResponse>(`${environment.baseUrl}/products`)
 }
 
-getSpecificProduct(id:string):Observable<any>{
+getSpecificProduct(id:string|null):Observable<any>{
   return this._httpClient.get(`${environment.baseUrl}/products/${id}`)
 }
 
