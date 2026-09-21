@@ -13,6 +13,7 @@ import { CategoriesComponent } from './Components/categories/categories.componen
 import { authGuard } from './core/guards/auth.guard';
 import { loggedinGuard } from './core/guards/loggedin.guard';
 import { DetailsComponent } from './Components/details/details.component';
+import { ForgotpasswordComponent } from './Components/forgotpassword/forgotpassword.component';
 export const routes: Routes = [
   {
     path: '',
@@ -21,7 +22,9 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent }
+      { path: 'register', component: RegisterComponent },
+      { path: 'forgotpassword', component: ForgotpasswordComponent }
+
     ]
   },
   {
