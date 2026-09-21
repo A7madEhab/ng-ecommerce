@@ -7,6 +7,7 @@ import { RegisterPayload } from '../interfaces/register-payload';
 import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from '../../../environments/environment.development';
+import { IcodeResetPasswordRequest } from '../interfaces/icode-reset-password-request';
 @Injectable({
   providedIn: 'root'
 })
@@ -35,6 +36,16 @@ setRegisterForm(data: RegisterPayload): Observable<AuthResponse> {
       localStorage.removeItem('userToken');
       this.userData='';
       this._router.navigate(['/login'])
+    }
+    verifyResetCode(code:IcodeResetPasswordRequest):Observable<any>{
+      return this._httpClient.post(`${environment.baseUrl}/auth/verifyResetCode`,code)
+    }
+    setEmailVerify(data:object):Observable<any>{
+      return this._httpClient.post(`${environment.baseUrl}/auth/forgotPasswords`,data)
+    }
+
+     setResetPassword(data:object):Observable<any>{
+      return this._httpClient.put(`${environment.baseUrl}/auth/resetPassword`,data)
     }
 }
  
