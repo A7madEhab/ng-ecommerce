@@ -1,1 +1,50 @@
-<p>cart works!</p>
+<section class="bg-light rounded-3 p-4">
+  <h2>Shop Cart:</h2>
+
+  <h4 class="text-success mb-4">
+    Total Price: {{ cartItems.totalCartPrice | number: "1.2-2" }} EGP
+  </h4>
+
+  @for (item of cartItems.products; track item._id) {
+    <div class="d-flex align-items-center gap-3 border-bottom py-3">
+      <!-- Product image -->
+      <img
+        [src]="item.product.imageCover"
+        [alt]="item.product.title"
+        height="80px"
+      />
+
+      <!-- Title + price + remove -->
+      <div class="flex-grow-1">
+        <p class="mb-1 fw-semibold">{{ item.product.title }}</p>
+        <p class="text-success mb-1">
+          Price: {{ item.price | number: "1.2-2" }} EGP
+        </p>
+        <button
+          type="button"
+          class="btn btn-link text-danger p-0"
+        >
+          <i class="fa-solid fa-trash-can me-1"></i>
+          <span>Remove</span>
+        </button>
+      </div>
+
+      <!-- Quantity controls -->
+      <div class="d-flex align-items-center gap-2">
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-secondary"
+        >
+          <i class="fa-solid fa-minus"></i>
+        </button>
+        <span class="px-2 fw-bold">{{ item.count }}</span>
+        <button
+          type="button"
+          class="btn btn-sm btn-outline-secondary"
+        >
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </div>
+    </div>
+  }
+</section>
