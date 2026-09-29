@@ -53,6 +53,12 @@ export interface UpdateCartResponse {
 }
 
 /** Response wrapper for DELETE /api/v1/cart (clear cart) */
+export interface DeleteCartItemResponse {
+  status: string;
+  numOfCartItems: number;
+  cartId: string;
+  data: Cart;
+}
 export interface ClearCartResponse {
   message: string;
 }
