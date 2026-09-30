@@ -13,6 +13,7 @@ import { FilterOnSearchPipe } from '../../core/pipes/filter-on-search.pipe';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../core/services/cart.service';
 import { AddToCartResponse } from '../../core/interfaces/cart';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private readonly _productsService = inject(ProductsService);
   private readonly _categoriesService = inject(CategoriesService);
   private readonly _cartService = inject(CartService);
+  private readonly _ToastrService = inject(ToastrService);
   productList: BaseProduct[] = [];
   searchTerm: string = '';
   categoriesList: Category[] = [];
@@ -106,6 +108,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         console.log(res.message); // "Product added successfully to your cart"
         console.log(res.numOfCartItems); // 1
         console.log(res.data.totalCartPrice); // 149
+        this._ToastrService.success(res.message,'FreshCart')
       },
       error: (err) => {
         console.error(err);

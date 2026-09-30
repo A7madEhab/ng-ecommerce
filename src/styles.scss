@@ -86,3 +86,10 @@ a:hover {
 .btn-main:hover {
   background-color: #11bd11;
 }
+.toast-container {
+  z-index: 99999 !important;
+}
+
+.toast-top-center {
+  top: 12px;
+}

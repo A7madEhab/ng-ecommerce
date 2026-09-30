@@ -1,0 +1,50 @@
+<form [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
+  <div formGroupName="shippingAddress">
+    <div class="mb-3">
+      <label>Details</label>
+      <input class="form-control" formControlName="details" />
+      @if (
+        checkoutForm.get("shippingAddress.details")?.touched &&
+        checkoutForm.get("shippingAddress.details")?.errors?.["required"]
+      ) {
+        <div class="text-danger">Details is required</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label>Phone</label>
+      <input class="form-control" formControlName="phone" />
+      @if (
+        checkoutForm.get("shippingAddress.phone")?.touched &&
+        checkoutForm.get("shippingAddress.phone")?.errors?.["required"]
+      ) {
+        <div class="text-danger">Phone is required</div>
+      }
+      @if (
+        checkoutForm.get("shippingAddress.phone")?.touched &&
+        checkoutForm.get("shippingAddress.phone")?.errors?.["pattern"]
+      ) {
+        <div class="text-danger">Invalid phone number</div>
+      }
+    </div>
+
+    <div class="mb-3">
+      <label>City</label>
+      <input class="form-control" formControlName="city" />
+      @if (
+        checkoutForm.get("shippingAddress.city")?.touched &&
+        checkoutForm.get("shippingAddress.city")?.errors?.["required"]
+      ) {
+        <div class="text-danger">City is required</div>
+      }
+    </div>
+  </div>
+
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [disabled]="checkoutForm.invalid"
+  >
+    Checkout
+  </button>
+</form>

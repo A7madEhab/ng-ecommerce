@@ -8,42 +8,65 @@
   @for (item of cartItems.products; track item._id) {
     <div class="row align-items-center border-bottom py-3 g-3">
       <!-- Product image -->
-        <div class="col-md-1">
-          <img
-            class="col-md-1"
-            [src]="item.product.imageCover"
-            [alt]="item.product.title"
-            class="w-100"
-          />
+      <div class="col-md-1">
+        <img
+          class="col-md-1"
+          [src]="item.product.imageCover"
+          [alt]="item.product.title"
+          class="w-100"
+        />
+      </div>
+      <div class="col-md-10 d-flex justify-content-between py-3">
+        <!-- Title + price + remove -->
+        <div>
+          <p class="mb-1 fw-semibold">{{ item.product.title }}</p>
+          <p class="text-success mb-1 h6">
+            Price: {{ item.price | number: "1.2-2" }} EGP
+          </p>
+          <button
+            type="button"
+            class="btn btn-link text-danger p-0"
+            (click)="removeCartItem(item.product._id)"
+          >
+            <i class="fa-solid fa-trash-can me-1"></i>
+            <span>Remove</span>
+          </button>
         </div>
-        <div class="col-md-10 d-flex justify-content-between py-3">
-          <!-- Title + price + remove -->
-          <div>
-            <p class="mb-1 fw-semibold">{{ item.product.title }}</p>
-            <p class="text-success mb-1 h6">
-              Price: {{ item.price | number: "1.2-2" }} EGP
-            </p>
-            <button type="button" class="btn btn-link text-danger p-0" (click)="removeCartItem(item.product._id)">
-              <i class="fa-solid fa-trash-can me-1"></i>
-              <span>Remove</span>
-            </button>
-          </div>
 
-          <!-- Quantity controls -->
-          <div class="d-flex align-items-center gap-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary"
-            (click)="updateCartItem(item.product._id, item.count - 1)">
-              <i class="fa-solid fa-minus"></i>
-            </button>
-            <span class="px-2 fw-bold">{{ item.count }}</span>
-            <button type="button" class="btn btn-sm btn-outline-secondary"
-            (click)="updateCartItem(item.product._id, item.count + 1)">
-              <i class="fa-solid fa-plus"></i>
-            </button>
-          </div>
+        <!-- Quantity controls -->
+        <div class="d-flex align-items-center gap-2">
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-secondary"
+            (click)="updateCartItem(item.product._id, item.count - 1)"
+          >
+            <i class="fa-solid fa-minus"></i>
+          </button>
+          <span class="px-2 fw-bold">{{ item.count }}</span>
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-secondary"
+            (click)="updateCartItem(item.product._id, item.count + 1)"
+          >
+            <i class="fa-solid fa-plus"></i>
+          </button>
         </div>
       </div>
-      <button class="btn btn-danger w-100 text-center"
-      (click)="ClearCart()">Clear the Cart</button>
+    </div>
   }
+  <div class="row">
+    <div class="col-md-4">
+      <button
+        class="btn btn-success w-100 text-center"
+        [routerLink]="['/orders', cartItems._id]"
+      >
+        Orders
+      </button>
+    </div>
+    <div class="col-md-8">
+      <button class="btn btn-danger w-100 text-center" (click)="ClearCart()">
+        Clear the Cart
+      </button>
+    </div>
+  </div>
 </section>

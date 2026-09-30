@@ -20,9 +20,7 @@ export class CartService {
   addProductToCart(id: string): Observable<AddToCartResponse> {
     return this._httpClient.post<AddToCartResponse>(
       `${environment.baseUrl}/cart`,
-      { productId: id },
-      { headers: { token: this.token ?? '' } },
-    );
+      { productId: id }    );
   }
   getItemsInCart(): Observable<GetCartResponse> {
     return this._httpClient.get<GetCartResponse>(

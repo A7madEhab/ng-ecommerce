@@ -4,20 +4,24 @@ import { Cart, GetCartResponse } from '../../core/interfaces/cart';
 import Swal from 'sweetalert2';
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { error } from 'console';
+import { ToastrService } from 'ngx-toastr';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
   standalone: true,
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, RouterLink],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
 export class CartComponent implements OnInit {
+  private readonly _cartService = inject(CartService);
+  private readonly _toastrService = inject(ToastrService);
+  private readonly _Router = inject(Router);
   cartItems: Cart = {} as Cart;
   ngOnInit(): void {
     this.getCartItems();
   }
-  private readonly _cartService = inject(CartService);
   getCartItems(): void {
     this._cartService.getItemsInCart().subscribe({
       next: (res) => {
@@ -42,6 +46,9 @@ export class CartComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.cartItems = res.data;
+        console.log('About to show toast', this._toastrService);
+        // this._toastrService.success(res.message);
+        this._toastrService.success('Product added to cart');
       },
       error: (err) => {
         console.log(err);
@@ -56,9 +63,9 @@ export class CartComponent implements OnInit {
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#dc3545', // Bootstrap Danger Red
-      cancelButtonColor: '#6c757d',  // Bootstrap Secondary Gray
+      cancelButtonColor: '#6c757d', // Bootstrap Secondary Gray
       confirmButtonText: 'Yes, clear it!',
-      cancelButtonText: 'Cancel'
+      cancelButtonText: 'Cancel',
     }).then((result) => {
       // Execute deletion only if user confirms
       if (result.isConfirmed) {
@@ -66,8 +73,8 @@ export class CartComponent implements OnInit {
           next: (res) => {
             if (res.message === 'success') {
               // Reset local UI state
-          this.getCartItems();
-
+              this._toastrService.success('Saved successfully');
+              this.getCartItems();
 
               // Show success alert
               Swal.fire({
@@ -75,7 +82,7 @@ export class CartComponent implements OnInit {
                 text: 'Your cart is now empty.',
                 icon: 'success',
                 timer: 1500,
-                showConfirmButton: false
+                showConfirmButton: false,
               });
             }
           },
@@ -84,11 +91,12 @@ export class CartComponent implements OnInit {
             Swal.fire({
               title: 'Error!',
               text: 'Failed to clear the cart. Please try again.',
-              icon: 'error'
+              icon: 'error',
             });
-          }
+          },
         });
       }
     });
   }
+
 }
